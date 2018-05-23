@@ -66,9 +66,23 @@ namespace {
 
 }
 
+ImageView::ImageView(Widget* parent, std::string fileName)
+    : Widget(parent), mScale(1.0f), mOffset(Vector2f::Zero()),
+    mFixedScale(false), mFixedOffset(false), mPixelInfoCallback(nullptr) {
+
+    GLTexture *texture = new GLTexture(); 
+    texture->load("resources/explora.png");
+    mImageID = texture->texture();
+    init();
+}
+
 ImageView::ImageView(Widget* parent, GLuint imageID)
     : Widget(parent), mImageID(imageID), mScale(1.0f), mOffset(Vector2f::Zero()),
     mFixedScale(false), mFixedOffset(false), mPixelInfoCallback(nullptr) {
+  init();  
+}
+
+void ImageView::init() {
     updateImageParameters();
     mShader.init("ImageViewShader", defaultImageViewVertexShader,
                  defaultImageViewFragmentShader);
@@ -291,7 +305,7 @@ void ImageView::draw(NVGcontext* ctx) {
 
     // Calculate several variables that need to be send to OpenGL in order for the image to be
     // properly displayed inside the widget.
-    const Screen* screen = dynamic_cast<const Screen*>(this->window()->parent());
+    const Screen* screen = dynamic_cast<const Screen*>(this->screen());
     assert(screen);
     Vector2f screenSize = screen->size().cast<float>();
     Vector2f scaleFactor = mScale * imageSizeF().cwiseQuotient(screenSize);

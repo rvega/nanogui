@@ -15,6 +15,7 @@
 #include <nanogui/opengl.h>
 #include <Eigen/Geometry>
 #include <map>
+#include <memory>
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 namespace half_float { class half; }
@@ -49,6 +50,27 @@ NAMESPACE_END(detail)
 using Eigen::Quaternionf;
 
 class GLUniformBuffer;
+
+//  ----------------------------------------------------
+
+class GLTexture {
+public:
+    using handleType = std::unique_ptr<uint8_t[], void(*)(void*)>;
+    GLTexture();
+    GLTexture(const std::string& textureName);
+    GLTexture(const std::string& textureName, GLint textureId);
+    GLTexture(const GLTexture& other) = delete;
+    GLTexture(GLTexture&& other) noexcept;
+    GLTexture& operator=(const GLTexture& other) = delete;
+    GLTexture& operator=(GLTexture&& other) noexcept;
+    ~GLTexture() noexcept;
+    GLuint texture() const { return mTextureId; }
+    const std::string& textureName() const { return mTextureName; }
+    handleType load(const std::string& fileName);
+private:
+    std::string mTextureName;
+    GLuint mTextureId;
+};
 
 //  ----------------------------------------------------
 

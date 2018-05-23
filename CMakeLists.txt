@@ -73,6 +73,10 @@ set(GLFW_INSTALL OFF CACHE BOOL " " FORCE)
 set(GLFW_USE_CHDIR OFF CACHE BOOL " " FORCE)
 set(BUILD_SHARED_LIBS ${NANOGUI_BUILD_SHARED} CACHE BOOL " " FORCE)
 
+if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  # Quench annoying deprecation warnings when compiling GLFW on Linux
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-format-truncation")
+endif()
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # Quench annoying deprecation warnings when compiling GLFW on OSX
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated-declarations")
@@ -134,6 +138,12 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "^(GNU|Clang|Intel)$")
     message(FATAL_ERROR "Unsupported compiler -- pybind11 requires C++11 support!")
   endif()
 endif()
+
+# RVG turn off annoying warnings
+if (CMAKE_CXX_COMPILER_ID MATCHES "^(GNU|Clang|Intel)$")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-format-truncation -Wno-int-in-bool-context -Wno-implicit-fallthrough -Wno-maybe-uninitialized -Wno-unused-parameter")
+endif()
+# !RVG
 
 # Various optimizations for shared library release builds
 if (NANOGUI_BUILD_SHARED)

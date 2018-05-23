@@ -27,6 +27,7 @@ NAMESPACE_BEGIN(nanogui)
  */
 class NANOGUI_EXPORT ImageView : public Widget {
 public:
+    ImageView(Widget* parent, std::string fileName);
     ImageView(Widget* parent, GLuint imageID);
     ~ImageView();
 
@@ -133,6 +134,9 @@ public:
     void draw(NVGcontext* ctx) override;
 
 private:
+    // Constructor helper
+    void init();
+
     // Helper image methods.
     void updateImageParameters();
 
