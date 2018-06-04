@@ -129,6 +129,8 @@ public:
     /// Sets the state of this Button provided the given Serializer.
     virtual bool load(Serializer &s) override;
 
+    void setFontFace(std::string face) {mFontFace = face;}
+
 protected:
     /// The caption of this Button.
     std::string mCaption;
@@ -169,6 +171,8 @@ protected:
 
     /// The button group for radio buttons.
     std::vector<Button *> mButtonGroup;
+
+    std::string mFontFace;
 
 public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW

@@ -71,7 +71,7 @@ ImageView::ImageView(Widget* parent, std::string fileName)
     mFixedScale(false), mFixedOffset(false), mPixelInfoCallback(nullptr) {
 
     GLTexture *texture = new GLTexture(); 
-    texture->load("resources/explora.png");
+    texture->load(fileName);
     mImageID = texture->texture();
     init();
 }
