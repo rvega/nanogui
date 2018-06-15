@@ -54,8 +54,8 @@ Theme::Theme(NVGcontext *ctx) {
     mButtonGradientBotPushed          = Color(29, 255);
 
     /* Window-related */
-    mWindowFillUnfocused              = Color(43, 230);
-    mWindowFillFocused                = Color(45, 230);
+    mWindowFillUnfocused              = Color(0, 255);
+    mWindowFillFocused                = Color(0, 255);
     mWindowTitleUnfocused             = Color(220, 160);
     mWindowTitleFocused               = Color(255, 190);
 

@@ -54,6 +54,7 @@ Vector2i Label::preferredSize(NVGcontext *ctx) const {
 
 void Label::draw(NVGcontext *ctx) {
     Widget::draw(ctx);
+
     nvgFontFace(ctx, mFont.c_str());
     nvgFontSize(ctx, fontSize());
     nvgFillColor(ctx, mColor);
