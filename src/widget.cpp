@@ -202,6 +202,13 @@ void Widget::requestFocus() {
     ((Screen *) widget)->updateFocus(this);
 }
 
+// CUSTOM: para instrumnetos electronicos
+void Widget::setLang(std::string lang){
+  for (auto child : mChildren) {
+    child->setLang(lang);
+  }
+};
+
 void Widget::draw(NVGcontext *ctx) {
     #if NANOGUI_SHOW_WIDGET_BOUNDS
         nvgStrokeWidth(ctx, 1.0f);

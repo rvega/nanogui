@@ -15,6 +15,7 @@
 #include <nanogui/object.h>
 #include <nanogui/theme.h>
 #include <vector>
+#include <iostream>
 
 NAMESPACE_BEGIN(nanogui)
 
@@ -257,6 +258,9 @@ public:
 
     /// Restore the state of the widget from the given \ref Serializer instance
     virtual bool load(Serializer &s);
+
+    // CUSTOM -> !!! modificiones hechas para musica electronica
+    virtual void setLang(std::string lang);
 
 protected:
     /// Free all resources used by the widget and any children
